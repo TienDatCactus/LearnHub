@@ -89,7 +89,7 @@ export default function HomeLayout({ children }: HomeLayoutProps) {
     };
     return (
         <div className={`${displaySidebar ? "ttr-opened-sidebar " : ""}ttr-pinned-sidebar `}>
-            <header className="ttr-header">
+            <header className="ttr-header ">
                 <div className="ttr-header-wrapper">
                     <div
                         onClick={() => setDisplaySidebar(!displaySidebar)}

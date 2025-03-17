@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { HomeLayout, MainLayout } from "../../layouts";
+import { HomeLayout, MainLayout } from "../../../layouts";
 
 interface Lesson {
     id: string;
@@ -24,7 +24,7 @@ interface Course {
     chapters: Chapter[];
 }
 
-const LearningPage = () => {
+const LearningLayout = ({ children }: any) => {
     const { courseId, lessonId } = useParams();
     const navigate = useNavigate();
     const [course, setCourse] = useState<Course | null>(null);
@@ -162,7 +162,7 @@ const LearningPage = () => {
                             maxHeight: "calc(100vh - 80px)",
                             overflowY: "scroll"
                         }}>
-                        {currentLesson ? (
+                        {/* {currentLesson ? (
                             <div className="p-4">
                                 <div className="mb-4">
                                     <h3>{currentLesson.title}</h3>
@@ -217,7 +217,8 @@ const LearningPage = () => {
                             </div>
                         ) : (
                             <div className="text-center p-5">Please select a lesson to begin</div>
-                        )}
+                        )} */}
+                        {children}
                     </div>
                 </div>
             </div>
@@ -225,4 +226,4 @@ const LearningPage = () => {
     );
 };
 
-export default LearningPage;
+export default LearningLayout;

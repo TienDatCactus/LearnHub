@@ -23,7 +23,7 @@ export { default as TeacherCourseDetails } from "./home/teacher/CourseDetails";
 export { default as MaterialDetails } from "./home/teacher/MaterialDetails";
 export { default as AddLesson } from "./home/teacher/AddLesson";
 export { default as AddQuiz } from "./home/teacher/AddQuiz";
-export { default as LearningPage } from "./learn/LearningPage";
+export { default as LearningPage } from "./home/student/LearningLayout";
 
 export { default as CourseQuiz } from "./home/student/CourseQuiz";
 export { default as DoQuiz } from "./home/student/DoQuiz";

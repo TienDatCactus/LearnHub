@@ -3,6 +3,8 @@ import { HomeLayout } from "../../../layouts";
 import { useEffect, useState } from "react";
 import { API } from "../../../api";
 import { toast } from "react-toastify";
+import LearningLayout from "./LearningLayout";
+import { tr, th } from "date-fns/locale";
 
 interface QuizHistory {
     id: number;
@@ -99,99 +101,84 @@ const temp: Quiz = {
 export default function CourseQuiz() {
     const { qid } = useParams();
     const [quiz, setQuiz] = useState<Quiz | null>(temp);
-    useEffect(() => {
-        API.get(`/students/me/quizes/${qid}`)
-            .then((resp) => {
-                console.log(resp.data);
-                setQuiz(resp.data);
-            })
-            .catch((err) => {
-                toast.error((err as Error).message);
-            });
-    }, [qid]);
+    // useEffect(() => {
+    //     API.get(`/students/me/quizes/${qid}`)
+    //         .then((resp) => {
+    //             console.log(resp.data);
+    //             setQuiz(resp.data);
+    //         })
+    //         .catch((err) => {
+    //             toast.error((err as Error).message);
+    //         });
+    // }, [qid]);
     return (
         <HomeLayout>
-            <main className="ttr-wrapper">
-                <div className="container-fluid">
-                    <div className="db-breadcrumb">
-                        <h4 className="breadcrumb-title">{quiz?.title}</h4>
+            <LearningLayout>
+                <div className="container-fluid py-4">
+                    <h4
+                        className="badge m-0"
+                        style={{
+                            fontSize: "1.5rem"
+                        }}>
+                        {quiz?.title}
+                    </h4>
+                    <div className="d-flex flex-column justify-content-between align-items-center mb-4">
+                        <p className="m-0">This quiz opened at Wednesday, 15 June 2022, 7:39 AM</p>
+                        <p className="m-0">
+                            Time Limit : <span>30 mins</span>
+                        </p>
+                        <p className="m-0">
+                            Grading method: <span>Highest grade</span>
+                        </p>
                     </div>
-                    <div className="row">
-                        <div className="col-lg-12 m-b30">
-                            <div className="widget-box">
-                                <div className="widget-inner">
-                                    <form className="edit-profile m-b30">
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="ml-auto">
-                                                    <h3>1. Description</h3>
-                                                </div>
-                                            </div>
-                                            <div className="form-group col-12">
-                                                <p>{quiz?.description}</p>
-                                            </div>
-                                            <div className="seperator"></div>
-                                            <div className="col-12 m-t20">
-                                                <div className="ml-auto">
-                                                    <h3 className="m-form__section">2. Quiz History</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-12">
-                                                <table id="item-add" style={{ width: "100%" }}>
-                                                    <tbody>
-                                                        {quiz?.history.map((attempt) => (
-                                                            <tr key={attempt.id} className="list-item">
-                                                                <td>
-                                                                    <div className="row">
-                                                                        <div className="col-md-4">
-                                                                            <label className="col-form-label">
-                                                                                Attempted Date
-                                                                            </label>
-                                                                            <div>
-                                                                                {new Date(
-                                                                                    attempt.attemptedAt
-                                                                                ).toDateString()}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="col-md-3">
-                                                                            <label className="col-form-label">
-                                                                                Grade
-                                                                            </label>
-                                                                            <div>{attempt.grade}</div>
-                                                                        </div>
-                                                                        <div className="col-md-2">
-                                                                            <label className="col-form-label">
-                                                                                Details
-                                                                            </label>
-                                                                            <div className="form-group">
-                                                                                <a className="delete" href="#">
-                                                                                    <i className="fa fa-close"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className="col-12">
-                                                <Link
-                                                    to={`/quiz/${qid}/do-quiz`}
-                                                    state={{ id: qid, questions: quiz?.questions }}
-                                                    className="btn">
-                                                    Do Quiz
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                    <div>
+                        <h5 className="m-0">Summary of your previous attempts :</h5>
+                        <table className="table table-striped  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Attempt</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col" className="text-center">
+                                        Marks
+                                    </th>
+                                    <th scope="col" className="text-center">
+                                        Grade / 100
+                                    </th>
+                                    <th scope="col" className="text-center">
+                                        Preview
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>
+                                        <p className="m-0">Finished</p>
+                                        <p className="m-0">Submitted Sunday, 25 February 2024, 5:03 PM</p>
+                                    </td>
+                                    <td className="text-center">14.00</td>
+                                    <td className="text-center">8.75</td>
+                                    <td className="text-center">
+                                        <a
+                                            href="#"
+                                            style={{
+                                                textDecoration: "underline"
+                                            }}>
+                                            Preview
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5>Highest grade: 8.75 / 10.00.</h5>
+                    <div className="w-25 mx-auto my-4">
+                        <Link to={`/quiz/1/do-quiz`}>
+                            <button className="btn btn-block">Do quiz</button>
+                        </Link>
                     </div>
                 </div>
-            </main>
+            </LearningLayout>
         </HomeLayout>
     );
 }
