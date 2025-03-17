@@ -40,6 +40,7 @@ import Dummy from "./pages/Dummy";
 import { ToastContainer } from "react-toastify";
 import { UserRole } from "./types/User";
 import UserProvider from "./hooks/useUser";
+import CourseDetail from "./pages/home/student/CourseDetail";
 
 export default function App() {
     const [isLoading, setLoading] = useState(true);
@@ -116,6 +117,7 @@ export default function App() {
                     <Route path="/quiz/:qid/do-quiz" element={<DoQuiz />} />
                     <Route path="/quiz/result/:id" element={<QuizResult />} />
                     <Route path="/course/:courseId/lesson/:lessonId" element={<LearningPage />} />
+                    <Route path="/course/:courseId" element={<CourseDetail />} />
                 </Route>
 
                 {/* Error Boundary */}
