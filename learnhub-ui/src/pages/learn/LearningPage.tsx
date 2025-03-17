@@ -193,7 +193,6 @@ const LearningPage = () => {
                                         <li>
                                             <a
                                                 type="button"
-                                                href="#"
                                                 className="link"
                                                 style={{
                                                     textDecoration: "underline"
